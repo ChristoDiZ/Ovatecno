@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+      <!-- Navbar -->
     <nav class="container bg-cyan-500 p-4 shadow-md mx-auto my-5 rounded-md">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo a la izquierda -->
@@ -18,16 +19,15 @@
             </div>
     
             <!-- Menú de navegación al centro -->
-            <div class="flex space-x-8">
-                <a href="#" class="text-white hover:text-blue-500  ">Inicio</a>
-                <a href="#" class="text-white hover:text-blue-500 ">Sucursales</a>
-                
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-white hover:text-blue-500">Inicio</a>
+                <a href="#" class="text-white hover:text-blue-500">Sucursales</a>
             </div>
     
             <!-- Botones de búsqueda, iniciar sesión, favoritos y carrito -->
             <div class="flex items-center space-x-6">
-                <!-- Botón de lupa (para búsqueda futura) -->
-                <button class=" text-white hover:text-gray-400">
+                <!-- Botón de lupa -->
+                <button class="text-white hover:text-gray-400">
                     <svg xmlns="#" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 fa fa-search">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 017 7 7 7 0 01-7 7 7 7 0 01-7-7 7 7 0 017-7zm0 14a7 7 0 007-7h2a9 9 0 11-9 9 9 9 0 018-9h-2z"></path>
                     </svg>
@@ -36,22 +36,21 @@
                 <!-- Botón Iniciar/Registrar -->
                 <a href="registro.html" class="text-white hover:text-gray-400">Iniciar/Registrar</a>
     
-                <!-- Icono de Corazón (Favoritos) -->
-                <button class="text-white hover:text-gray-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21l-1-1c-5-5.5-8-8.5-8-12A5 5 0 0112 3a5 5 0 011 9.8A5 5 0 0112 21z"></path>
-                    </svg>
-                </button>
-    
-                <!-- Icono de Carro de Compras -->
-                <button class="text-white hover:text-gray-400">
+                <!-- Icono de Carro de Compras con contador -->
+                <button id="cart-icon" class="relative text-white hover:text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-1 12H4L3 3zm3 16h12a2 2 0 100-4H6a2 2 0 100 4z"></path>
                     </svg>
+                    <!-- Contador de productos en el carrito -->
+                    <span id="cart-count" class="absolute top-[-5px] right-[-5px] bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">                   0
+                      </span>
+                      
                 </button>
             </div>
         </div>
     </nav>
+  
+  
     <!-- Carrusel -->
   <div class="container relative w-full mx-auto mt-4 ">
     <div class="relative">
@@ -83,7 +82,7 @@
       
       
      <!-- Listado de categorías -->
-<div class="container bg-cyan-400 p-4 mt-8 mx-auto rounded-md">
+<div class="container bg-cyan-400 p-4 mt-8 mx-auto rounded-md shadow-lg">
     <div class="flex justify-around text-white">
       <div class="category-item">
         <a href="#" class="category-link hover:text-gray-400" onclick="loadCategory(event, 'computacion')">Computación</a>
@@ -108,11 +107,12 @@
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
         <!-- Producto 1 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
-          <img src="img/4.png" alt="Producto 1" class="w-full h-40 object-cover mb-4">
-          <p class="font-semibold">Producto 1</p>
-          <p class="text-gray-600 text-sm">Descripción detallada del producto 1.</p>
-          <p class="mt-2 text-gray-700">Stock: 10</p>
-          <p class="mt-2 text-xl font-bold">$499.99</p>
+            <img src="img/4.png" alt="Producto 1" class="w-full h-40 object-cover mb-4">
+            <p class="font-semibold">Producto 1</p>
+            <p class="text-gray-600 text-sm">Descripción detallada del producto 1.</p>
+            <p class="mt-2 text-gray-700">Stock: 10</p>
+            <p class="mt-2 text-xl font-bold">$499.99</p>
+            <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 2 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -121,6 +121,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del producto 2.</p>
           <p class="mt-2 text-gray-700">Stock: 20</p>
           <p class="mt-2 text-xl font-bold">$399.99</p>
+          <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 3 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -129,6 +130,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del producto 3.</p>
           <p class="mt-2 text-gray-700">Stock: 5</p>
           <p class="mt-2 text-xl font-bold">$599.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 4 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -137,6 +139,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del producto 4.</p>
           <p class="mt-2 text-gray-700">Stock: 15</p>
           <p class="mt-2 text-xl font-bold">$299.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 5 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -145,6 +148,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del producto 5.</p>
           <p class="mt-2 text-gray-700">Stock: 7</p>
           <p class="mt-2 text-xl font-bold">$799.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
       </div>
     </div>
@@ -160,6 +164,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del accesorio 1.</p>
           <p class="mt-2 text-gray-700">Stock: 30</p>
           <p class="mt-2 text-xl font-bold">$199.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 2 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -168,6 +173,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del accesorio 2.</p>
           <p class="mt-2 text-gray-700">Stock: 12</p>
           <p class="mt-2 text-xl font-bold">$149.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 3 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -176,6 +182,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del accesorio 3.</p>
           <p class="mt-2 text-gray-700">Stock: 8</p>
           <p class="mt-2 text-xl font-bold">$129.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 4 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -184,6 +191,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del accesorio 4.</p>
           <p class="mt-2 text-gray-700">Stock: 20</p>
           <p class="mt-2 text-xl font-bold">$99.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
         <!-- Producto 5 -->
         <div class="product-card border p-4 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -192,6 +200,7 @@
           <p class="text-gray-600 text-sm">Descripción detallada del accesorio 5.</p>
           <p class="mt-2 text-gray-700">Stock: 15</p>
           <p class="mt-2 text-xl font-bold">$89.99</p>
+           <button onclick="addToCart()" class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded-md hover:bg-cyan-600">Agregar al Carrito</button>
         </div>
       </div>
     </div>
